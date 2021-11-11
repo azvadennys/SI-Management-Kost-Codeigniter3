@@ -16,6 +16,7 @@
     <script src="<?= base_url('assets/vendors/moment/moment.min.js') ?>" type="text/javascript"></script>
     <script src="<?= base_url('assets/vendors/moment/datetime-moment.js') ?>" type="text/javascript"></script>
     <script src="<?= base_url('assets/vendors/toastr/toastr.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/vendors/chart.js/dist/Chart.js') ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#tabel-responsif').DataTable({

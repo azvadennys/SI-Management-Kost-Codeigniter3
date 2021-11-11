@@ -21,6 +21,8 @@
     <!-- SWEET ALERT-->
     <link href="<?= base_url('assets/vendors/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet">
     <!-- CUSTOM STYLES-->
+    <link href="<?= base_url('assets/vendors/fullcalendar/dist/fullcalendar.min.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/vendors/fullcalendar/dist/fullcalendar.print.min.css') ?>" rel="stylesheet" media="print" />
     <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet" />
     <link href="<?= base_url('assets/css/custom-1280.css') ?>" rel="stylesheet" />
     <link href="<?= base_url('assets/css/custom-768.css') ?>" rel="stylesheet" />

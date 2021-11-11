@@ -18,7 +18,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Lantai</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" name="lantai" placeholder="Lantai" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                                    <select class="form-control" type="text" name="lantai" placeholder="Lantai" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                                    <Option>1</Option>
+                                    <Option>2</Option>
+                                    <Option>3</Option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

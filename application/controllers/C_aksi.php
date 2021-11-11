@@ -128,7 +128,7 @@ class C_aksi extends CI_Controller {
             show_404();
         }
         else {
-            if ($this->m_data->delete_penghuni($id) == true){
+            if ($this->m_data->penghuni_keluar($id) == true){
                 $no_kamar = $penghuni->no_kamar;
 
                 if ($penghuni->status == 'Penghuni'){

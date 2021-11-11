@@ -19,11 +19,19 @@ class C_admin extends CI_Controller
         $data['judul_halaman'] = 'Dasbor';
         $data['pesan'] = $this->session->flashdata('pesan');
         $data['username'] = $this->session->userdata('username');
+        $data['total'] = $this->m_data->countpenghuni();
+        $data['totalpenghasilan'] = $this->m_data->totalpenghasilan();
+        $data['kamarterisi'] = $this->m_data->kamarterisi();
+        $data['kamarkosong'] = $this->m_data->kamarkosong();
+        $data['lantai1'] = $this->m_data->countlantai1();
+        $data['lantai2'] = $this->m_data->countlantai2();
+        $data['lantai3'] = $this->m_data->countlantai3();
+
 
         $this->load->view('_partials/v_head', $data);
         $this->load->view('_partials/v_header');
         $this->load->view('_partials/v_sidebar', $data);
-        $this->load->view('v_dasbor'); //page content
+        $this->load->view('v_dasbor', $data); //page content
         $this->load->view('_partials/v_footer');
         // $this->load->view('_partials/v_theme-config');
         $this->load->view('_partials/v_preloader');
@@ -148,7 +156,7 @@ class C_admin extends CI_Controller
     {
         $data['judul_halaman'] = 'Tambah Kamar';
         $data['username'] = $this->session->userdata('username');
-        
+
         $this->load->view('_partials/v_head', $data);
         $this->load->view('_partials/v_header');
         $this->load->view('_partials/v_sidebar', $data);

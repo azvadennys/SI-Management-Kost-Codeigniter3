@@ -1,99 +1,159 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_data extends CI_Model {
+class M_data extends CI_Model
+{
 
-    
 
-    function detail_penghuni($where){
+
+    function detail_penghuni($where)
+    {
 
         $this->db->select('*');
         $this->db->where($where);
-        $this->db->order_by('no_kamar');
+        $this->db->order_by('no_kamar','ASC');
         return $this->db->get('detail_penghuni');
     }
 
-    function detail_pembayaran($where){
+    function detail_pembayaran($where)
+    {
         return $this->db->get_where('detail_pembayaran', $where);
     }
 
-    function detail_kamar($where){
+    function detail_kamar($where)
+    {
         return $this->db->get_where('detail_kamar', $where);
     }
 
-    function data_kamar(){
-        
-        $this->db->order_by('lantai','ASC');
+    function data_kamar()
+    {
+
+        $this->db->order_by('lantai', 'ASC');
         return $this->db->get('detail_kamar');
     }
 
-    function data_kamar_terisi(){
-        
-        $this->db->order_by('lantai','ASC');
-        $this->db->where('jml_penghuni','1');
+    function data_kamar_terisi()
+    {
+        $this->db->order_by('lantai', 'ASC');
+        $this->db->where('jml_penghuni', '1');
         return $this->db->get('detail_kamar');
     }
+    public function countlantai1()
+    {
+        $this->db->where('lantai', 1);
+        return count($this->db->get('detail_kamar')->result());
+    }
+    public function countlantai2()
+    {
+        $this->db->where('lantai', 2);
+        return count($this->db->get('detail_kamar')->result());
+    }
+    public function countlantai3()
+    {
+        $this->db->where('lantai', 3);
+        return count($this->db->get('detail_kamar')->result());
+    }
+    public function countpenghuni()
+    {
+        $this->db->where('status', 'penghuni');
+        return count($this->db->get('detail_penghuni')->result());
+    }
 
-  
-     function data_user($where){
-         $this->db->select('nama, username');
-         $this->db->where($where);
-         return $this->db->get('admin');
-     }
+    public function kamarkosong()
+    {
+        $this->db->where('jml_penghuni', 0);
+        return count($this->db->get('detail_kamar')->result());
+    }
 
-    function insert_penghuni($data){
+    public function kamarterisi()
+    {
+        $this->db->where('jml_penghuni', 1);
+        return count($this->db->get('detail_kamar')->result());
+    }
+
+    public function totalpenghasilan()
+    {
+        $sql = "SELECT sum(bayar) as bayarr from detail_pembayaran";
+        $result = $this->db->query($sql);
+        return $result->row()->bayarr;
+    }
+
+    function data_user($where)
+    {
+        $this->db->select('nama, username');
+        $this->db->where($where);
+        return $this->db->get('admin');
+    }
+
+    function insert_penghuni($data)
+    {
         $this->db->insert('penghuni', $data);
         return ($this->db->affected_rows() > 0) ? true : false;
     }
 
-    function insert_kamar($data){
+    function insert_kamar($data)
+    {
         $this->db->insert('kamar', $data);
         return ($this->db->affected_rows() > 0) ? true : false;
     }
 
-    function insert_pembayaran($data){
+    function insert_pembayaran($data)
+    {
         $this->db->insert('keuangan', $data);
         return ($this->db->affected_rows() > 0) ? true : false;
     }
 
-     
-     function insert_user($user_baru){
-         $this->db->insert('admin', $user_baru);
-         return ($this->db->affected_rows() > 0) ? true : false;
-     }
 
-    function update_harga($no_kamar, $harga){
+    function insert_user($user_baru)
+    {
+        $this->db->insert('admin', $user_baru);
+        return ($this->db->affected_rows() > 0) ? true : false;
+    }
+
+    function update_harga($no_kamar, $harga)
+    {
         $this->db->where('no_kamar', $no_kamar);
         return $this->db->update('kamar', array('harga' => $harga)) ? true : false;
     }
 
-    function update_penghuni($id_penghuni, $data){
+    function update_penghuni($id_penghuni, $data)
+    {
         $this->db->where('id', $id_penghuni);
         return $this->db->update('penghuni', $data) ? true : false;
     }
 
-    function update_pembayaran($id_pembayaran, $data){
+    function update_pembayaran($id_pembayaran, $data)
+    {
         $this->db->where('id_pembayaran', $id_pembayaran);
         return $this->db->update('keuangan', $data) ? true : false;
     }
 
-    function update_password($username, $password_baru){
+    function update_password($username, $password_baru)
+    {
         $this->db->where('username', $username);
         return $this->db->update('admin', array('password' => $password_baru)) ? true : false;
     }
 
-    function delete_penghuni($id){
+    function delete_penghuni($id)
+    {
         $this->db->delete('penghuni', array('id' => $id));
         return ($this->db->affected_rows() > 0) ? true : false;
     }
 
-    function delete_pembayaran($id_pembayaran){
+    function delete_pembayaran($id_pembayaran)
+    {
         $this->db->delete('keuangan', array('id_pembayaran' => $id_pembayaran));
         return ($this->db->affected_rows() > 0) ? true : false;
     }
 
-     function delete_user($username){
-         $this->db->delete('admin', array('username' => $username));
-         return ($this->db->affected_rows() > 0) ? true : false;
-     }
+    function delete_user($username)
+    {
+        $this->db->delete('admin', array('username' => $username));
+        return ($this->db->affected_rows() > 0) ? true : false;
+    }
+    function penghuni_keluar($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('penghuni',array('status' => 'Keluar')) ? true : false;
+    }
 }
